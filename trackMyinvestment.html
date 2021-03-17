@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <link rel="stylesheet" href="main.css" />
+  
+</head>
+
+
+
+
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=number] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover , button{
+  background-color: #45a049;
+}
+
+div {
+  
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+h3{
+color:white;
+
+}
+
+</style>
+
+<h3>Initial investment</h3>
+<body>
+
+
+<div>
+<section>
+    <form  method="post" class="addform">
+      <label for="fname">Stock</label>
+      <input type="text" id="fname" name="Stock" placeholder="Stock..">
+
+      <label for="lpriceInit">Buy Price</label>
+      <input type="text" id="lpriceBuy" name="PriceBuy" placeholder="Buy price..">
+      <label for="lpriceActu">Actual price</label>
+      <input type="text" id="lpriceActu" name="PriceActual" placeholder="Actual price..">
+
+      <label for="nshare">Number of shares</label>
+      <input type="number" id="nshares" name="shares" placeholder="Number of shares..">
+
+      <label for="devis">Devis</label>
+      <select id="Devis" name="Devis">
+        <option value="Dollar">Dollar</option>
+        <option value="Euro">Euro</option>
+      </select>
+      
+        </form>
+   </section>
+
+       
+       
+  </div>
+     <section class="btnmgt">
+          <button id="start" onclick="Add_stock()" type="button">Add New Stock</button>
+          <button id="start" onclick="remove_last_stock()" type="button">Remove last Stock</button>
+          <button id="start" onclick="location.href='main.html'" type="button">Back</button>
+  
+     </section>
+    <script src="main.js"></script>
+
+
+
+</body>
+</html>
