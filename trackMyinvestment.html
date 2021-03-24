@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
+  <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">  
   <link rel="stylesheet" href="main.css" />
-  
+  <script type="text/javascript"   src="main.js"></script>
 </head>
 
 
@@ -54,7 +55,29 @@ h3{
 color:white;
 
 }
+ fieldset{
+margin-bottom: 20px;
+color:white;
+font-size:20px;
+ }
 
+
+ table{
+   border-collapse: collapse;
+   width:100%;
+ }
+
+ td,th{
+border: 1px solid white;
+padding:8px;
+
+ }
+
+ th{
+font-weight:bold;
+text-transform: uppercase;
+
+ }
 </style>
 
 <h3>Initial investment</h3>
@@ -63,7 +86,7 @@ color:white;
 
 <div>
 <section>
-    <form  method="post" class="addform">
+    <form  method="post" id="addform">
       <label for="fname">Stock</label>
       <input type="text" id="fname" name="Stock" placeholder="Stock..">
 
@@ -90,11 +113,78 @@ color:white;
      <section class="btnmgt">
           <button id="start" onclick="Add_stock()" type="button">Add New Stock</button>
           <button id="start" onclick="remove_last_stock()" type="button">Remove last Stock</button>
+          <button id="start" onclick="refreshData()" type="button">Visualize My data</button>
           <button id="start" onclick="location.href='main.html'" type="button">Back</button>
-  
+          <button id="start" onclick="resetData()" type="button">Reset Data</button>
      </section>
-    <script src="main.js"></script>
 
+     <section class="DataInput">
+      <fieldset>
+         <legend>Local data</legend>
+         <table>
+           <thead>
+
+             <tr>
+                  <th>Stock</th>
+                  <th>Buy Price</th>
+                  <th>Actual Price</th>
+                  <th>Numbers of Shares</th>
+                  <th>Devis</th>
+             </tr>
+           </thead>
+
+          <tbody id="localStorageData"></tbody>
+
+
+
+
+
+         </table>
+
+      </fieldset>
+
+     </section>
+
+
+    
+   <script type="text/javascript">
+
+
+// function to visualise data
+   function refreshData(){
+        location.reload();
+   }
+// function to clear datastorage
+   function resetData(){
+        window.localStorage.clear();
+   }
+
+//create dynamic table of data storage
+
+let tableData1 = JSON.parse(window.localStorage.getItem('key_tab'));
+  
+  window.onload = () => {
+            window.loadTabledata1(tableData1);
+
+          }
+
+function loadTabledata1(tableData1){
+            const tableBody =document.getElementById('localStorageData');
+            let tableM= tableData1;
+            let dataHtml='';
+      ///// add data to table of visualization
+           for(let i = 0;i < tableM.length;i++ ){
+
+            dataHtml +=`<tr><td>${tableM[i].stock}</td><td>${tableM[i].BuyPrice}</td><td>${tableM[i].ActualPrice}</td><td>${tableM[i].shares}</td><td>${tableM[i].devis}</td></tr>`;
+          
+            }
+        
+          tableBody.innerHTML = dataHtml;
+
+   }
+
+  
+  </script>
 
 
 </body>
