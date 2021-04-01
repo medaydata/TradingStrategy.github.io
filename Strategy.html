@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <link rel="stylesheet" href="main.css" />
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+
+
+
+
+<style>
+
+
+
+
+
+div {
+  
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+h3,p{
+color:white;
+padding-bottom: 20px;
+
+}
+ fieldset{
+    
+    color:white;
+    font-size:20px;
+ }
+
+
+ table{
+   border-collapse: collapse;
+   width:100%;
+ }
+
+ td,th{
+border: 1px solid white;
+padding:8px;
+
+ }
+
+ th{
+font-weight:bold;
+text-transform: uppercase;
+
+ }
+
+
+
+
+ 
+</style>
+
+<h3>Strategy Buy and Sell</h3>
+<p>Please complete the cells in blue before simulation</P>
+<body>
+
+       
+       
+  </div>
+     
+     <section class="DataInput">
+      <fieldset>
+         <legend>Simulation table</legend>
+         <table>
+           <thead>
+
+             <tr>
+              <th>Stock</th>
+              <th>Actual Price</th>
+              <th>Numbers of Shares</th>
+              <th>Ratio</th>
+              <th>Selling Price</th>
+              <th>Number of shares to sell</th>
+              <th>Total Earningv($)</th>
+             </tr>
+           </thead>
+
+          <tbody id="localStorageData"></tbody>
+
+         </table>
+
+      </fieldset>
+
+     </section>
+
+
+
+     <section class="btnmgt">
+        <button id="start" onclick="simulation()" type="button">Simulation</button>
+        <button id="start" onclick="refreshData()" type="button">New simulation</button>
+        <button id="start" onclick="location.href='main.html'" type="button">Back to main Page</button>
+    </section>
+
+  
+    
+   <script type="text/javascript">
+
+
+// function to refresh storage data
+   function refreshData(){
+        location.reload();
+   }
+
+
+//create dynamic table of data storage
+
+let tableData1 = JSON.parse(window.localStorage.getItem('key_tab'));
+  
+  window.onload = () => {
+            window.loadTabledata1(tableData1);
+
+          }
+
+function loadTabledata1(tableData1){
+            const tableBody =document.getElementById('localStorageData');
+            let tableM= tableData1;
+            let dataHtml='';
+      ///// add data to table of visualization
+           for(let i = 0;i < tableM.length;i++ ){
+            
+            let totalInvest= tableM[i].BuyPrice*tableM[i].shares;
+            let ActualInvestment= tableM[i].ActualPrice*tableM[i].shares;
+            dataHtml +=`<tr><td>${tableM[i].stock}</td><td>${tableM[i].ActualPrice}</td><td>${tableM[i].shares}</td><td contenteditable='true' bgcolor="blue"></td><td contenteditable='true'></td><td contenteditable='true' bgcolor="blue"></td><td contenteditable='true'></td></tr>`;
+            
+            }
+        
+           tableBody.innerHTML = dataHtml;
+           
+
+   }
+
+   /////Simulation
+  
+   function simulation(){
+            const tableBody =document.getElementById('localStorageData');
+            let tableM= tableData1;
+            let dataHtml='';
+             let globalearningValue=0;
+      ///// add data to table of visualization
+           for(let i = 0;i < tableM.length;i++ ){
+            let ratio = parseInt(document.getElementById('localStorageData').rows[i].cells[2].innerHTML);
+            let actualPrice = parseInt(document.getElementById('localStorageData').rows[i].cells[1].innerHTML);
+            let sellingprice = parseInt(actualPrice*(100+ratio)/100);
+            let numberofsharestosell = (parseInt(document.getElementById('localStorageData').rows[i].cells[5].innerHTML));
+
+            let earningtot= Math.round((sellingprice - actualPrice)*numberofsharestosell);
+            globalearningValue+=(sellingprice - actualPrice)*numberofsharestosell;
+            dataHtml +=`<tr><td>${tableM[i].stock}</td><td>${tableM[i].ActualPrice}</td><td>${tableM[i].shares}</td><td contenteditable='true'>${ratio}</td><td>${sellingprice}</td><td contenteditable='true'>${numberofsharestosell}</td><td>${earningtot}</td></tr>`;
+
+           
+            }
+        
+         tableBody.innerHTML = dataHtml;
+        
+
+   }
+
+  
+  </script>
+
+
+</body>
+</html>

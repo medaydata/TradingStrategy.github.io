@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">  
   <link rel="stylesheet" href="main.css" />
   <script type="text/javascript"   src="main.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
 
 
@@ -51,7 +52,7 @@ div {
   background-color: #f2f2f2;
   padding: 20px;
 }
-h3{
+h3,p{
 color:white;
 
 }
@@ -78,9 +79,17 @@ font-weight:bold;
 text-transform: uppercase;
 
  }
+ /* Second BreakPoint  for devices less than -909px */ */
+
+
+
+
+
+
 </style>
 
 <h3>Initial investment</h3>
+<p>Please start to enter your portfolio of stocks by click " Add New Stock" after each new stock, when you finish the submit of all stocks to analyze click "Visualize My data" to see where you are... </p>
 <body>
 
 
@@ -112,10 +121,10 @@ text-transform: uppercase;
   </div>
      <section class="btnmgt">
           <button id="start" onclick="Add_stock()" type="button">Add New Stock</button>
-          <button id="start" onclick="remove_last_stock()" type="button">Remove last Stock</button>
           <button id="start" onclick="refreshData()" type="button">Visualize My data</button>
-          <button id="start" onclick="location.href='main.html'" type="button">Back</button>
+          <button id="start" onclick="location.href='Graph.html'" type="button">Graph</button>
           <button id="start" onclick="resetData()" type="button">Reset Data</button>
+         
      </section>
 
      <section class="DataInput">
@@ -125,11 +134,13 @@ text-transform: uppercase;
            <thead>
 
              <tr>
-                  <th>Stock</th>
-                  <th>Buy Price</th>
-                  <th>Actual Price</th>
-                  <th>Numbers of Shares</th>
-                  <th>Devis</th>
+              <th>Stock</th>
+              <th>Buy Price</th>
+              <th>Actual Price</th>
+              <th>Numbers of Shares</th>
+              <th>Total Investment</th>
+              <th>Actual Value Of Investment</th>
+              <th>Devis</th>
              </tr>
            </thead>
 
@@ -150,7 +161,7 @@ text-transform: uppercase;
    <script type="text/javascript">
 
 
-// function to visualise data
+// function to visualize data
    function refreshData(){
         location.reload();
    }
@@ -174,8 +185,10 @@ function loadTabledata1(tableData1){
             let dataHtml='';
       ///// add data to table of visualization
            for(let i = 0;i < tableM.length;i++ ){
-
-            dataHtml +=`<tr><td>${tableM[i].stock}</td><td>${tableM[i].BuyPrice}</td><td>${tableM[i].ActualPrice}</td><td>${tableM[i].shares}</td><td>${tableM[i].devis}</td></tr>`;
+            
+            let totalInvest= tableM[i].BuyPrice*tableM[i].shares;
+            let ActualInvestment= tableM[i].ActualPrice*tableM[i].shares;
+            dataHtml +=`<tr><td>${tableM[i].stock}</td><td>${tableM[i].BuyPrice}</td><td>${tableM[i].ActualPrice}</td><td>${tableM[i].shares}</td><td>${totalInvest}</td><td>${ActualInvestment}</td><td>${tableM[i].devis}</td></tr>`;
           
             }
         
@@ -188,4 +201,5 @@ function loadTabledata1(tableData1){
 
 
 </body>
+
 </html>

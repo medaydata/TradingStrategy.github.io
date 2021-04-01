@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+
+
+
+
+<style>
+body {
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  background: linear-gradient(90deg, rgb(60, 60, 102) 0%, rgb(40, 88, 60) 35%, rgb(15, 181, 214) 100%);
+}
+
+
+h1{
+color:rgb(29, 16, 16);
+
+}
+
+ fieldset{
+margin-bottom: 20px;
+color:rgb(29, 16, 16);
+font-size:20px;
+z-index:1;
+ }
+
+
+ table,.chartContainer{
+   border-collapse: collapse;
+   width:100%;
+ }
+
+ td,th{
+border: 1px solid white;
+padding:8px;
+
+ }
+
+ th{
+font-weight:bold;
+text-transform: uppercase;
+
+ }
+ tr:hover{
+     background-color: rgb(19, 16, 12);
+     color: rgb(223, 213, 213);
+ }
+ .localData{
+
+ margin-bottom: 10px;
+
+ }
+ canvas{
+
+    z-index: -1;
+    padding-top: 25px;
+ }
+</style>
+
+<body>
+       
+
+    <section>
+    
+
+     <div class="canvas">
+
+       <div id="chartContainer" ></div>
+
+    </section>
+
+   </div>
+    
+   
+
+
+
+   <script type="text/javascript">
+
+let tableData1 = JSON.parse(window.localStorage.getItem('key_tab'));
+  
+  
+
+    ///// Creation of chart 
+
+var tableData2=tableData1;
+var dataP1 =[];
+ var dataP2 =[];
+       for(let i = 0 ; i< tableData2.length;i++){
+           var entry1={};
+           var entry2={};
+           
+           entry1={
+             label: tableData2[i].stock, y: Number(tableData2[i].BuyPrice)*Number(tableData2[i].shares)/1000
+           }
+           dataP1.push(entry1);
+           entry2={
+             label: tableData2[i].stock, y: Number(tableData2[i].ActualPrice)*Number(tableData2[i].shares)/1000
+           }
+           dataP2.push(entry2);
+       }
+    window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer", {            
+        title:{
+        text: "Difference between Actuel and initial investment for each stock"              
+      },
+
+     
+      data: [  
+      { //dataSeries - Buy Price
+        
+       type: "column",
+       name: "Initial value of investment",
+       showInLegend: true,
+       dataPoints: dataP1
+     },
+
+     { //dataSeries -Actual Price
+
+      type: "column",
+      name: "Actual value of nvestment", 
+      showInLegend: true,               
+      dataPoints:dataP2
+    }
+    ],
+ /** Set axisY properties here*/
+    axisY:{
+      prefix: "$",
+      suffix: "K"
+    }    
+  });
+
+chart.render();
+}
+  </script>
+
+
+</body>
+</html>

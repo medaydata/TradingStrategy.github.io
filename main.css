@@ -42,3 +42,41 @@ header{
 #start:hover {
   box-shadow: 0 0 10px 0 #0d6141 inset, 0 0 10px 4px #40440a;
 }
+/* 
+First breakPoint  for mobile devices at 480px */
+@media screen and (max-width: 480px) {
+  .Start-btn {
+    display:inline-block;
+    justify-content: space-between;
+    height: auto;
+    width: 100%;
+    border-radius: 8px;
+      }
+
+      #start{
+        margin:5px;
+      }
+     
+    
+      
+    }
+
+
+/* 
+Second BreakPoint  for devices less than -909px */
+
+@media screen and (max-width: 909px) {
+ 
+      #start{
+        margin:15px;
+      }
+     
+}
+ /* 
+Second BreakPoint  for table  less than 630px */
+
+@media screen and (max-width: 645px) {
+ 
+  
+ 
+}
